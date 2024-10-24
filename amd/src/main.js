@@ -18,7 +18,7 @@
  *
  * Ally admin tool log view.
  *
- * @package    tool_ally
+ * @package
  * @copyright  Code based on admin/tool/behatdump (c) Guy Thomas 2018
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -32,25 +32,34 @@
     require.config({
         enforceDefine: false,
         paths: {
-            // Vendor code.
+            // Vendor code
             "tool_ally/vue_2_5_16": [
-                "https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min",
-                // CDN Fallback - whoop whoop!
+                // Using the AMD version of Vue
+                "https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.common",
+                // CDN Fallback
                 pluginJSURL("vendorjs/vue")
             ],
             "tool_ally/vuerouter_2_5_3": [
-                "https://cdn.jsdelivr.net/npm/vue-router@2.5.3/dist/vue-router.min",
-                // CDN Fallback - whoop whoop!
+                // Using the AMD version of Vue Router
+                "https://cdn.jsdelivr.net/npm/vue-router@2.5.3/dist/vue-router.common",
+                // CDN Fallback
                 pluginJSURL("vendorjs/vuerouter")
             ],
-
-            // Note, vuedatable is not via a CDN because it has been customised (made more accessible).
             "tool_ally/vuedatatable": pluginJSURL("vendorjs/vuedatatable"),
-
-            // Vue components
-            "tool_ally/vuecomp": [
-                pluginJSURL('vue/comps')
-            ],
+            "tool_ally/vuecomp": pluginJSURL('vue/comps')
+        },
+        shim: {
+            'tool_ally/vue_2_5_16': {
+                exports: 'Vue'
+            },
+            'tool_ally/vuerouter_2_5_3': {
+                deps: ['tool_ally/vue_2_5_16'],
+                exports: 'VueRouter'
+            },
+            'tool_ally/vuedatatable': {
+                deps: ['tool_ally/vue_2_5_16'],
+                exports: 'VueDataTable'
+            }
         }
     });
 })();
