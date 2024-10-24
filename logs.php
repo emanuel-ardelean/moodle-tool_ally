@@ -36,7 +36,8 @@ $PAGE->set_heading(get_string('logs', 'tool_ally'));
 $PAGE->requires->jquery();
 
 echo $OUTPUT->header();
-
+$PAGE->requires->js('/admin/tool/ally/amd/build/main.min.js', true);
+$PAGE->requires->js_init_call('requirejs.config', [['deps' => ['tool_ally/main']]]);
 $PAGE->requires->js_call_amd('tool_ally/logviewer', 'init');
 
 $template = <<<TEMP

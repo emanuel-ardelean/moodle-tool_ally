@@ -1,7 +1,6 @@
 define(
     [
         'jquery',
-        'tool_ally/main',
         'core/ajax',
         'tool_ally/vuecomp/th-Filter',
         'tool_ally/vuecomp/td-HTML',
